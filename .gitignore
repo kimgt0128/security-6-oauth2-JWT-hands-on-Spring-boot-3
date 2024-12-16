@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### Client Secret 정보 숨기기
+/src/main/resources/application-oauth.yml

@@ -1,0 +1,14 @@
+spring:
+
+  profiles:
+    include: oauth
+
+  application:
+    name: OAuth2 JWT Hands On
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force-response: 'true'
+
