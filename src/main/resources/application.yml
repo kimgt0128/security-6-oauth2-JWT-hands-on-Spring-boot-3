@@ -6,9 +6,38 @@ spring:
   application:
     name: OAuth2 JWT Hands On
 
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    properties:
+      hibernate:
+        #dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        highlight_sql: true
+        use_sql_comments: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oauth2_jwt?useSSL=false&useUnicode=true&character_set_server=utf8mb4&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: root
+    password: "0000"
+
 server:
   servlet:
     encoding:
       charset: UTF-8
       force-response: 'true'
+
+
+logging:
+  level:
+    root: info
+    org.hibernate.sql: debug
+    org.hibernate.type.descriptor.sql: debug
+    org.springframework.security: trace
+
+
 
