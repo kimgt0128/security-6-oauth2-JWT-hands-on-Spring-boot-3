@@ -1,7 +1,9 @@
 spring:
-
   profiles:
-    include: oauth
+    include:
+      -oauth
+      -jwt
+    active: oauth, jwt
 
   application:
     name: OAuth2 JWT Hands On
