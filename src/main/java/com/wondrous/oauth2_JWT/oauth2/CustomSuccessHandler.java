@@ -1,7 +1,7 @@
 package com.wondrous.oauth2_JWT.oauth2;
 
 import com.wondrous.oauth2_JWT.dto.CustomOAuth2User;
-import com.wondrous.oauth2_JWT.jwt.JWTUtil;
+import com.wondrous.oauth2_JWT.jwt.service.JWTUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

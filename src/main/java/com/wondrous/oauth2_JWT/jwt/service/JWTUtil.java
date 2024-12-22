@@ -1,4 +1,4 @@
-package com.wondrous.oauth2_JWT.jwt;
+package com.wondrous.oauth2_JWT.jwt.service;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
