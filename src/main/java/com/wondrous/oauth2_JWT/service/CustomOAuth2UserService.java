@@ -23,7 +23,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
-        // 1. 인가 서버 ㅇ
+        // 1. 인가 서버
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
