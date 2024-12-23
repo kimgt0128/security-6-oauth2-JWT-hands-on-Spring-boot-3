@@ -3,6 +3,7 @@ package com.wondrous.oauth2_JWT.config;
 
 import com.wondrous.oauth2_JWT.jwt.filter.JWTFilter;
 import com.wondrous.oauth2_JWT.jwt.service.JWTUtil;
+import com.wondrous.oauth2_JWT.oauth2.CustomFailureHandler;
 import com.wondrous.oauth2_JWT.oauth2.CustomSuccessHandler;
 import com.wondrous.oauth2_JWT.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
+    private final CustomFailureHandler customFailureHandler;
     private final JWTUtil jwtUtil;
 
     @Bean
@@ -40,7 +42,8 @@ public class SecurityConfig {
                 .oauth2Login((oauth2) -> oauth2
                         .userInfoEndpoint((userInfoEndpointConfig -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService)))
-                        .successHandler(customSuccessHandler));
+                        .successHandler(customSuccessHandler)
+                        .failureHandler(customFailureHandler));
 
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);

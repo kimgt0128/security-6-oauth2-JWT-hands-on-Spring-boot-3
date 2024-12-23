@@ -7,7 +7,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,9 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     private final JWTUtil jwtUtil;
 
+
+
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
@@ -36,14 +41,24 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         GrantedAuthority auth = authoritiesIterator.next();
         String role = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(username, role, 60*60*60L);
+        // 토큰 생성
+        String access = jwtUtil.createJwt("access", username, role, 60*60*60L);
+        String refresh = jwtUtil.createJwt("refresh", username, role, 86400000L);
 
-        response.addCookie(createCookie("Authorization", token));
+
+
+        // 토큰 저장 - 이후 구현
+
+        // 응답 설정
+        response.setStatus(HttpStatus.OK.value());
+        response.setHeader("access", access);
+        response.addCookie(createCookie("access", access));
         response.sendRedirect("http//localhost:3000/");
 
 
     }
 
+    // 이후 모듈화
     private Cookie createCookie(String key, String value) {
         Cookie cookie = new Cookie(key, value);
         //cookie.setSecure(true); - https에서만 허용하도록(실제 배포시)
