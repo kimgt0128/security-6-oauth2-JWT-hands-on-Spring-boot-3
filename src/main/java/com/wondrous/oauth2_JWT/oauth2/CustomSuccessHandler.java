@@ -1,7 +1,7 @@
 package com.wondrous.oauth2_JWT.oauth2;
 
 import com.wondrous.oauth2_JWT.dto.CustomOAuth2User;
-import com.wondrous.oauth2_JWT.jwt.service.JWTUtil;
+import com.wondrous.oauth2_JWT.jwt.service.JwtTokenProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -23,7 +22,7 @@ import java.util.Iterator;
 @Component
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final JWTUtil jwtUtil;
+    private final JwtTokenProvider jwtUtil;
 
 
 

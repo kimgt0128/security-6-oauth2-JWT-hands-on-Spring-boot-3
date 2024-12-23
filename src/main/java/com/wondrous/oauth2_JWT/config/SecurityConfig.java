@@ -1,8 +1,8 @@
 package com.wondrous.oauth2_JWT.config;
 
 
-import com.wondrous.oauth2_JWT.jwt.filter.JWTFilter;
-import com.wondrous.oauth2_JWT.jwt.service.JWTUtil;
+import com.wondrous.oauth2_JWT.jwt.filter.JwtAuthenticationFilter;
+import com.wondrous.oauth2_JWT.jwt.service.JwtTokenProvider;
 import com.wondrous.oauth2_JWT.oauth2.CustomFailureHandler;
 import com.wondrous.oauth2_JWT.oauth2.CustomSuccessHandler;
 import com.wondrous.oauth2_JWT.service.CustomOAuth2UserService;
@@ -25,7 +25,7 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
     private final CustomFailureHandler customFailureHandler;
-    private final JWTUtil jwtUtil;
+    private final JwtTokenProvider jwtUtil;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, CustomOAuth2UserService customOAuth2UserService) throws Exception{
@@ -46,7 +46,7 @@ public class SecurityConfig {
                         .failureHandler(customFailureHandler));
 
         http
-                .addFilterBefore(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         // 경로별 인가
         http
